@@ -49,7 +49,16 @@
 
 %include <GraphMol/Bond.h>
 
+/* For the time being, assume all properties will be strings */
+%template(setProp)  RDKit::Bond::setProp<std::string>;
+
 %extend RDKit::Bond {
+  std::string getProp(const std::string key){
+    std::string res;
+    ($self)->getProp(key, res);
+    return res;
+  }
+
   /* Methods from MolFileStereoChem.h */
   Bond::BondDir DetermineBondWedgeState(const RDKit::INT_MAP_INT &wedgeBonds,
                                         const RDKit::Conformer *conf) {
