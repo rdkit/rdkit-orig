@@ -761,8 +761,8 @@ namespace RDKit{
         throw FileParseException(errout.str()) ;
       }
       symb = text.substr(31,3);
-      symb = symb.substr(0,symb.find(' '));
-    
+      boost::erase_all(symb, " ");
+      
       // REVIEW: should we handle missing fields at the end of the line?
       massDiff=0;
       if(text.size()>=36 && text.substr(34,2)!=" 0"){
